@@ -1,0 +1,19 @@
+<div class="app-shell">
+  <mat-toolbar color="primary" class="app-toolbar">
+    <mat-icon class="toolbar-icon">badge</mat-icon>
+    <span class="toolbar-title">Ration Card Management System</span>
+    <span class="spacer"></span>
+    <nav class="nav-links">
+      <a mat-button routerLink="/list" routerLinkActive="active-link">Manage Records</a>
+      <a mat-button routerLink="/add" routerLinkActive="active-link">Add New</a>
+    </nav>
+  </mat-toolbar>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="app-footer">
+    <p>&copy; 2026 Ration Card Management System &mdash; Government of India</p>
+  </footer>
+</div>

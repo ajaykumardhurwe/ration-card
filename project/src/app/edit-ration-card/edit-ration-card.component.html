@@ -1,0 +1,216 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Edit Ration Card</h1>
+    <button mat-stroked-button (click)="goBack()">Back to List</button>
+  </div>
+
+  <div class="spinner-overlay" *ngIf="isLoading">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <mat-card class="form-card" *ngIf="!isLoading">
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>District</mat-label>
+            <mat-select formControlName="district">
+              <mat-option *ngFor="let d of districts" [value]="d.name">{{ d.name }}</mat-option>
+            </mat-select>
+            <mat-error>District is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Block</mat-label>
+            <mat-select formControlName="block">
+              <mat-option *ngFor="let b of blocks" [value]="b">{{ b }}</mat-option>
+            </mat-select>
+            <mat-error>Block is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Gram Panchayat</mat-label>
+            <mat-select formControlName="gramPanchayat">
+              <mat-option *ngFor="let g of gramPanchayats" [value]="g">{{ g }}</mat-option>
+            </mat-select>
+            <mat-error>Gram Panchayat is required</mat-error>
+          </mat-form-field>
+        </div>
+
+       
+        <div class="form-row">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Ration Card Name</mat-label>
+            <input matInput formControlName="rationCardName" placeholder="Enter full name" />
+            <mat-error>Ration card name is required (3–80 chars)</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Date of Birth</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dob" [max]="maxDate" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>Date of birth is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option value="Male">Male</mat-option>
+              <mat-option value="Female">Female</mat-option>
+              <mat-option value="Transgender">Transgender</mat-option>
+            </mat-select>
+            <mat-error>Gender is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Mobile</mat-label>
+            <input matInput formControlName="mobile" maxlength="10" placeholder="10-digit number" />
+            <mat-error>Enter a valid 10-digit mobile number</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="example@domain.com" />
+            <mat-error>Enter a valid email</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Total Family Members</mat-label>
+            <input matInput type="number" formControlName="totalFamilyMembers" min="1" max="50" />
+            <mat-error>Enter a value between 1 and 50</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting">
+            {{ isSubmitting ? 'Updating…' : 'Update' }}
+          </button>
+          <button mat-stroked-button type="button" (click)="goBack()">Cancel</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<div class="page-container">
+  <div class="page-header">
+    <h1>Edit Ration Card</h1>
+    <button mat-stroked-button (click)="goBack()">Back to List</button>
+  </div>
+
+  <div class="spinner-overlay" *ngIf="isLoading">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <mat-card class="form-card" [hidden]="isLoading">
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>District</mat-label>
+            <mat-select formControlName="district">
+              <mat-option *ngFor="let d of districts" [value]="d.name">{{ d.name }}</mat-option>
+            </mat-select>
+            <mat-error>District is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Block</mat-label>
+            <mat-select formControlName="block">
+              <mat-option *ngFor="let b of blocks" [value]="b">{{ b }}</mat-option>
+            </mat-select>
+            <mat-error>Block is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Gram Panchayat</mat-label>
+            <mat-select formControlName="gramPanchayat">
+              <mat-option *ngFor="let g of gramPanchayats" [value]="g">{{ g }}</mat-option>
+            </mat-select>
+            <mat-error>Gram Panchayat is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Ration Card Name</mat-label>
+            <input matInput formControlName="rationCardName" placeholder="Enter full name" />
+            <mat-error>Ration card name is required (3–80 chars)</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Date of Birth</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dob" [max]="maxDate" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>Date of birth is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option value="Male">Male</mat-option>
+              <mat-option value="Female">Female</mat-option>
+              <mat-option value="Transgender">Transgender</mat-option>
+            </mat-select>
+            <mat-error>Gender is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Mobile</mat-label>
+            <input matInput formControlName="mobile" maxlength="10" placeholder="10-digit number" />
+            <mat-error>Enter a valid 10-digit mobile number</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="example@domain.com" />
+            <mat-error>Enter a valid email</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Total Family Members</mat-label>
+            <input matInput type="number" formControlName="totalFamilyMembers" min="1" max="50" />
+            <mat-error>Enter a value between 1 and 50</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting">
+            {{ isSubmitting ? 'Updating…' : 'Update' }}
+          </button>
+          <button mat-stroked-button type="button" (click)="goBack()">Cancel</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div> -->
